@@ -1,0 +1,112 @@
+<div class="body">
+
+  <section class="hero">
+    <h1 class="section-title">Reserva tus vacaciones soñadas con solo unos clicks</h1>
+    <div class="explorar-btn-wrapper">
+      <a href="https://booking.buenohotel.com.do" id="explorar-btn">
+        <span class="explorar-text">Explorar</span>
+        <span class="explorar-arrow">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 13H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M14.5 8L20 13L14.5 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+  <!-- --- CAMBIO BUENOHOTEL --- INICIO: SECCIÓN MIS RESERVAS -->
+
+
+  <section id="mis-reservas-section" class="mis-reservas">
+    <h2>Mis reservas</h2>
+    <button (click)="toggleReservas()" id="mostrar-reservas-btn">
+  <span class="btn-icon">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="5" width="16" height="14" rx="3" stroke="#263342" stroke-width="2"/>
+      <path d="M7 2V6" stroke="#ff9100" stroke-width="2" stroke-linecap="round"/>
+      <path d="M15 2V6" stroke="#ff9100" stroke-width="2" stroke-linecap="round"/>
+      <rect x="7" y="10" width="2" height="2" rx="1" fill="#ffd200"/>
+      <rect x="11" y="10" width="2" height="2" rx="1" fill="#ffd200"/>
+    </svg>
+  </span>
+  {{ showReservas ? 'Ocultar mis reservas' : 'Mostrar mis reservas' }}
+</button>
+
+<div *ngIf="showReservas">
+  <table *ngIf="reservas.length > 0" id="mis-reservas-table">
+    <thead>
+      <tr><th>Nombre</th><th>Fecha</th><th>Servicio</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reserva of reservas; let i = index">
+        <td>{{ reserva.nombre }}</td>
+        <td>{{ reserva.fecha }}</td>
+        <td>{{ reserva.servicio }}</td>
+        <td><button (click)="eliminarReserva(i)">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="reservas.length === 0" class="no-reservas-msg">
+    <p>No tienes reservas.</p>
+    <button (click)="scrollToServiciosDestacados()" id="reservar-ahora-btn">
+  <span class="btn-icon">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="10" stroke="#ffd200" stroke-width="2" fill="#fffbe8"/>
+      <path d="M11 6.5L12.9021 9.8541L16.6085 10.5279L13.8042 13.0459L14.5406 16.7279L11 14.8541L7.45936 16.7279L8.1958 13.0459L5.39155 10.5279L9.09789 9.8541L11 6.5Z" fill="#ffd200" stroke="#ff9100" stroke-width="1.2"/>
+    </svg>
+  </span>
+  Reservar ahora
+</button>
+  </div>
+</div>
+ 
+  </section>
+  <!-- --- CAMBIO BUENOHOTEL --- FIN: SECCIÓN MIS RESERVAS -->
+  <section id="servicios-section" class="content">
+    <h2>Servicios Destacados</h2>
+    <div class="services">
+      <!-- Hoteles -->
+      <div class="service card-anim">
+        <img src="https://st4.depositphotos.com/16253490/21017/v/450/depositphotos_210175078-stock-illustration-building-icon-vector-sign-and.jpg" alt="Icono de Hotel" />
+        <h3><a href="https://booking.buenohotel.com.do" target="_blank">Hoteles</a></h3>
+        <p>Encuentra los mejores hoteles para tu descanso.</p>
+      </div>
+      <!-- Tours -->
+      <div class="service card-anim">
+        <span style="font-size: 2.5rem; display: block;">✈️</span>
+        <h3><a href="https://tours.buenohotel.com.do" target="_blank">Tours</a></h3>
+        <p>Explora nuevos destinos con nuestros tours guiados.</p>
+      </div>
+      <!-- Seguros -->
+      <div class="service card-anim">
+        <img src="https://previews.123rf.com/images/veronawinner/veronawinner1805/veronawinner180500056/102415401-medical-insurance-icon-health-insurance-symbol.jpg" alt="Icono de Seguros" />
+        <h3><a href="#" target="_blank">Seguros de Viaje</a></h3>
+        <p>Viaja con tranquilidad con nuestros seguros.</p>
+      </div>
+      <!-- Alojamientos -->
+      <div class="service card-anim">
+        <span style="font-size: 2.5rem; display: block;">🏨</span>
+        <h3><a href="https://booking.buenohotel.com.do" target="_blank">Alojamientos</a></h3>
+        <p>Opciones de alojamiento para todo tipo de viajes.</p>
+      </div>
+      <!-- Alquiler de Vehículos -->
+      <div class="service card-anim">
+        <img src="https://www.kindpng.com/picc/m/341-3410910_sedan-hatchback-car-icon-png-transparent-png.png" alt="Icono de Alquiler de Vehículos" />
+        <h3><a href="#" target="_blank">Alquiler de Vehículos</a></h3>
+        <p>Alquila el vehículo perfecto para tu viaje.</p>
+      </div>
+      <!-- Traslados -->
+      <div class="service card-anim">
+        <span style="font-size: 2.5rem; display: block;">🚌</span>
+        <h3><a href="#" target="_blank">Traslados</a></h3>
+        <p>Traslados seguros y rápidos desde el aeropuerto.</p>
+      </div>
+      <!-- Eventos -->
+      <div class="service card-anim">
+        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="Eventos" />
+        <h3><a href="https://eventos.buenohotel.com.do" target="_blank">Eventos</a></h3>
+        <p>Organiza y reserva tus eventos especiales con nosotros.</p>
+      </div>
+    </div>
+  </section>
+</div>

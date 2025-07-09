@@ -1,0 +1,181 @@
+// === FOOTER MODERNO GLOBAL ===
+.footer-bueno {
+  padding-bottom: 4.5rem;
+  background: linear-gradient(180deg, #263342 0%, #1a232d 100%);
+  color: #fff;
+  position: relative;
+  overflow: visible;
+  padding-bottom: 4.5rem;
+  position: relative;
+  overflow: visible;
+  background: #181818;
+  color: #fff;
+  padding: 2.5rem 1rem 1.5rem 1rem;
+  margin-top: 3rem;
+  border-radius: 2rem 2rem 0 0;
+  box-shadow: 0 -2px 24px 0 rgba(0,0,0,0.12);
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo-center {
+  margin-bottom: 1.5rem;
+}
+.footer-main-logo {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 24px #0008);
+}
+
+.footer-links-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.7rem 1.1rem;
+  justify-items: center;
+  margin: 1.1rem auto 1.2rem auto;
+  max-width: 700px;
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  box-sizing: border-box;
+}
+
+.footer-link-card {
+  background: #fff;
+  color: #263342;
+  border-radius: 0.7rem;
+  padding: 0.55rem 0.5rem 0.55rem 0.6rem;
+  font-weight: 600;
+  font-size: 0.97rem;
+  text-decoration: none;
+  box-shadow: 0 1px 8px 0 #0001, 0 1px 3px 0 #fbb03b11;
+  border: 1px solid #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 34px;
+  width: 100%;
+  gap: 0.45rem;
+  transition: box-shadow 0.18s, border 0.18s, color 0.18s, background 0.18s, transform 0.15s;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.footer-link-card span, .footer-link-card img {
+  font-size: 1.13em;
+  display: flex;
+  align-items: center;
+  margin-right: 0.38em;
+  filter: none;
+}
+
+.footer-link-card img {
+  width: 1.45em;
+  height: 1.45em;
+  margin-right: 0.65em;
+  filter: invert(40%) sepia(75%) saturate(600%) hue-rotate(180deg) brightness(1.1);
+}
+
+.footer-link-card:hover, .footer-link-card:focus {
+  box-shadow: 0 8px 32px #fbb03b55, 0 2px 16px 0 #0003;
+  border: 1.5px solid #fbb03b;
+  color: #fbb03b;
+  background: #222;
+  transform: translateY(-3px) scale(1.05);
+  z-index: 2;
+}
+
+.footer-link-card:hover span, .footer-link-card:hover img {
+  filter: brightness(1.2) drop-shadow(0 2px 8px #fbb03b44);
+}
+
+.footer-separator {
+  width: 90%;
+  border-top: 1.5px solid #333;
+  margin: 1.5rem auto 1.2rem auto;
+}
+
+.footer-pay-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 1.1rem;
+}
+
+.footer-pay-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.footer-pay-logos img {
+  height: 36px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2px 10px;
+  box-shadow: 0 2px 8px #0002;
+}
+
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  color: #eee;
+}
+
+.footer-contact-info a {
+  color: #fbb03b;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.footer-contact-info a:hover {
+  color: #fff;
+  background: #fbb03b;
+  border-radius: 6px;
+  padding: 0 4px;
+}
+
+.footer-legal {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.footer-legal-link {
+  color: #fbb03b;
+  font-size: 0.98rem;
+  text-decoration: underline dotted;
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+}
+.footer-legal-link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+.footer-copyright {
+  width: 100%;
+  text-align: center;
+  color: #888;
+  font-size: 0.99rem;
+  margin-bottom: 0.5rem;
+}
