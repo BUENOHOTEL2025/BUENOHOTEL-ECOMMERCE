@@ -1,0 +1,250 @@
+/* --- CAMBIO BUENOHOTEL --- CSS RESPONSIVO Y MEJORAS UI --- */
+
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.main-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FBB03B;
+}
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.main-nav a:hover {
+  color: #FBB03B;
+}
+
+/* Responsive nav */
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    padding: 12px 8px;
+    align-items: flex-start;
+  }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding-left: 0;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+.servicios-destacados {
+  padding: 32px 16px;
+  background: #fff;
+  margin: 24px auto;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.servicios-destacados h2 {
+  text-align: center;
+  color: #FBB03B;
+  margin-bottom: 24px;
+}
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 24px;
+}
+.servicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 18px 8px;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.servicio img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+.servicio a {
+  color: #333;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+.servicio a:hover {
+  color: #FBB03B;
+}
+
+.mis-reservas {
+  padding: 32px 16px;
+  background: #fff;
+  margin: 24px auto;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.mis-reservas h2 {
+  color: #FBB03B;
+  margin-bottom: 18px;
+}
+#mis-reservas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+}
+#mis-reservas-table th, #mis-reservas-table td {
+  border: 1px solid #eee;
+  padding: 8px 12px;
+  text-align: center;
+}
+#mis-reservas-table th {
+  background: #FBB03B;
+  color: #fff;
+}
+#mis-reservas-table td button {
+  background: #FBB03B;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#mis-reservas-table td button:hover {
+  background: #d9982b;
+}
+
+.contacto {
+  background: #fff;
+  margin: 24px auto;
+  max-width: 700px;
+  border-radius: 10px;
+  padding: 32px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.contacto-info p {
+  margin-bottom: 8px;
+}
+
+.footer {
+  background: #222;
+  color: #fff;
+  padding: 32px 16px 16px 16px;
+  border-radius: 10px 10px 0 0;
+  margin-top: 32px;
+}
+.terminos-condiciones h3 {
+  color: #FBB03B;
+}
+.terminos-condiciones form {
+  margin-bottom: 12px;
+}
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #fff;
+}
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #FBB03B;
+  width: 18px;
+  height: 18px;
+}
+.terminos-condiciones button[type="submit"] {
+  background: #FBB03B;
+  color: #222;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.terminos-condiciones button[type="submit"]:hover {
+  background: #d9982b;
+  color: #fff;
+}
+.footer-copy {
+  text-align: center;
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-top: 18px;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  background: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s;
+}
+.whatsapp-float-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+}
+.whatsapp-float-btn img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 600px) {
+  .main-header, .servicios-destacados, .mis-reservas, .contacto, .footer {
+    padding: 12px 4px;
+  }
+  .servicios-destacados h2, .mis-reservas h2, .contacto h2 {
+    font-size: 1.2rem;
+  }
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .servicio img {
+    width: 38px;
+    height: 38px;
+  }
+  #mis-reservas-table th, #mis-reservas-table td {
+    font-size: 0.93rem;
+    padding: 5px 4px;
+  }
+}

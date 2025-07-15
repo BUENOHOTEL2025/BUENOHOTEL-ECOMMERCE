@@ -1,0 +1,86 @@
+<form
+  action="https://pruebas.azul.com.do/PaymentPage/"
+  method="post"
+  id="paymentForm"
+  name="paymentForm"
+  (submit)="$event.preventDefault(); onSubmit()"
+>
+  <input type="hidden" id="MerchantId" name="MerchantId" [value]="MerchantId" />
+  <input
+    type="hidden"
+    id="MerchantName"
+    name="MerchantName"
+    [value]="MerchantName"
+  />
+  <input
+    type="hidden"
+    id="MerchantType"
+    name="MerchantType"
+    [value]="MerchantType"
+  />
+  <input type="hidden" id="CurrencyCode" name="CurrencyCode" [value]="CurrencyCode" />
+  <input type="hidden" id="OrderNumber" name="OrderNumber" [value]="OrderNumber" />
+  <input type="hidden" id="Amount" name="Amount" [value]="Amount" />
+  <input type="hidden" id="ITBIS" name="ITBIS" [value]="ITBIS" />
+  <input
+    type="hidden"
+    id="ApprovedUrl"
+    name="ApprovedUrl"
+    [value]="ApprovedUrl"
+  />
+  <input
+    type="hidden"
+    id="DeclinedUrl"
+    name="DeclinedUrl"
+    [value]="DeclinedUrl"
+  />
+  <input
+    type="hidden"
+    id="CancelUrl"
+    name="CancelUrl"
+    [value]="CancelUrl"
+  />
+  <input type="hidden" id="UseCustomField1" name="UseCustomField1" [value]="UseCustomField1" />
+  <input
+    type="hidden"
+    id="CustomField1Label"
+    name="CustomField1Label"
+    [value]="CustomField1Label"
+  />
+  <input
+    type="hidden"
+    id="CustomField1Value"
+    name="CustomField1Value"
+    [value]="CustomField1Value"
+  />
+  <input type="hidden" id="UseCustomField2" name="UseCustomField2" [value]="UseCustomField2" />
+  <input
+    type="hidden"
+    id="CustomField2Label"
+    name="CustomField2Label"
+    [value]="CustomField2Label"
+  />
+  <input
+    type="hidden"
+    id="CustomField2Value"
+    name="CustomField2Value"
+    [value]="CustomField2Value"
+  />
+  <input type="hidden" id="AuthHash" name="AuthHash" [value]="authHash" />
+  <div class="terms-container">
+    <label class="terms-label">
+      <input type="checkbox" [(ngModel)]="termsAccepted" name="termsAccepted" class="terms-checkbox">
+      Acepto los <a [routerLink]="['/politicas']" target="_blank" class="terms-link">Términos y Condiciones</a> y las 
+      <a [routerLink]="['/politicas']" target="_blank" class="terms-link">Políticas de Privacidad</a>
+    </label>
+  </div>
+  
+  <button
+    type="submit"
+    class="add-to-cart"
+    [disabled]="!termsAccepted"
+    [ngClass]="{'disabled-btn': !termsAccepted}"
+  >
+    {{ submit }}
+  </button>
+</form>

@@ -1,0 +1,39 @@
+<header>
+  <div class="logo-container">
+    <img
+      src="assets/logo/logo-white.png"
+      alt="Logo BuenoHotel"
+      class="header-main-logo"
+    />
+  </div>
+  <div class="header-controls">
+    <div class="country-selector">
+      <select [(ngModel)]="currentLanguage" (change)="onLanguageChange()" title="Seleccionar País">
+        <option *ngFor="let country of languages" [value]="country.code" [selected]="currentLanguage === country.code">
+          {{ country.flag }} {{ country.name }}
+        </option>
+      </select>
+    </div>
+    <div class="currency-selector">
+      <select [(ngModel)]="selectedCurrency" (change)="onCurrencyChange()" title="Seleccionar Moneda">
+        <option value="DOP">DOP $ (Peso Dominicano)</option>
+        <option value="USD">USD $ (Dólar Estadounidense)</option>
+      </select>
+    </div>
+  </div>
+  <nav>
+    <ul class="main-menu">
+      <li><a [routerLink]="['/']" [ngClass]="{ 'active': isActive('/') }">Inicio</a></li>
+      <li><a href="https://www.buenohotel.com" target="_blank">Conócenos</a></li>
+      <li><a [routerLink]="['/contactos']" [ngClass]="{ 'active': isActive('/contactos') }">Contacto</a></li>
+      <li><a [routerLink]="['/politicas']" [ngClass]="{ 'active': isActive('/politicas') }">Políticas</a></li>
+    </ul>
+  </nav>
+  <!-- Selector de Moneda -->
+  
+  <!-- Botón flotante WhatsApp -->
+  <a *ngIf="!router.url.startsWith('/politicas')" href="https://wa.me/18093034991" class="whatsapp-float-btn" target="_blank" title="WhatsApp BuenoHotel">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+  <!-- Comentario: aquí puedes cambiar el logo o iconos finales -->
+</header>

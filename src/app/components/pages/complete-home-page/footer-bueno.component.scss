@@ -1,0 +1,292 @@
+/*
+  SCSS dedicado para el footer animado y moderno de BuenoHotel
+  Divide los estilos del footer del resto de la página para evitar sobrepasar budgets de Angular.
+*/
+
+.footer-bueno {
+  padding-bottom: 4.5rem;
+  background: #000000;
+  color: #ffffff;
+  position: relative;
+  overflow: visible;
+  padding: 2.5rem 1rem 1.5rem 1rem;
+  margin-top: 3rem;
+  border-radius: 2rem 2rem 0 0;
+  box-shadow: 0 -2px 24px 0 rgba(0,0,0,0.12);
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo-center {
+  margin-bottom: 1.5rem;
+}
+.footer-main-logo {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 24px #0008);
+}
+
+.footer-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.7rem 2.2rem;
+  margin-bottom: 1.5rem;
+}
+.footer-card-link {
+  color: #fff;
+  background: #474747;
+  border-radius: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  font-weight: 500;
+  font-size: 1.09rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 2px 8px 0 #0004;
+  transition: transform 0.18s, background 0.18s, box-shadow 0.18s;
+  position: relative;
+}
+.footer-card-link:hover {
+  background: #fbb03b;
+  color: #000000;
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 6px 24px 0 #fbb03b88;
+}
+.footer-card-link span {
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+}
+.footer-icon {
+  margin-right: 0.5em;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.18s;
+}
+.footer-card-link:hover .footer-icon {
+  transform: scale(1.18) rotate(-8deg);
+}
+
+.footer-separator {
+  width: 90%;
+  border-top: 1.5px solid #333;
+  margin: 1.5rem auto 1.2rem auto;
+}
+
+.footer-pay-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 1.1rem;
+}
+.footer-pay-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.footer-pay-logos img {
+  height: 36px;
+  background: #fbb03b;
+  border-radius: 8px;
+  padding: 2px 10px;
+  box-shadow: 0 2px 8px #0002;
+}
+.footer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  color: #eee;
+}
+.footer-contact-info a {
+  color: #fbb03b;
+  text-decoration: underline;
+  font-weight: 600;
+}
+.footer-contact-info a:hover {
+  color: #fff;
+  background: #fbb03b;
+  border-radius: 6px;
+  padding: 0 4px;
+}
+
+.footer-legal {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.footer-legal-link {
+  color: #fbb03b;
+  font-size: 0.98rem;
+  text-decoration: underline dotted;
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+  &:hover {
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+.footer-copyright {
+  width: 100%;
+  text-align: center;
+  color: #888;
+  font-size: 0.99rem;
+  margin-bottom: 0.5rem;
+}
+
+// Responsive
+@media (max-width: 800px) {
+  .footer-content {
+    padding: 0 0.5rem;
+  }
+  .footer-pay-contact {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+}
+@media (max-width: 600px) {
+  .footer-links-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.4rem 2.2rem;
+  justify-items: center;
+  margin: 2.2rem auto 2.4rem auto;
+  max-width: 900px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.footer-link-card {
+  background: #fbb03b;
+  color: #000000;
+  border-radius: 1.3rem;
+  padding: 1.1rem 1rem 1.1rem 1.1rem;
+  font-weight: 600;
+  font-size: 1.09rem;
+  text-decoration: none;
+  box-shadow: 0 2px 16px 0 #0002, 0 1.5px 7px 0 #fbb03b22;
+  border: 1.5px solid #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 56px;
+  width: 100%;
+  gap: 0.8rem;
+  transition: box-shadow 0.18s, border 0.18s, color 0.18s, background 0.18s, transform 0.15s;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.footer-link-card span, .footer-link-card img {
+  font-size: 1.45em;
+  display: flex;
+  align-items: center;
+  margin-right: 0.65em;
+  filter: none;
+}
+.footer-link-card img {
+  width: 1.45em;
+  height: 1.45em;
+  margin-right: 0.65em;
+  filter: invert(40%) sepia(75%) saturate(600%) hue-rotate(180deg) brightness(1.1);
+}
+.footer-link-card:hover, .footer-link-card:focus {
+  box-shadow: 0 8px 32px #fbb03b55, 0 2px 16px 0 #0003;
+  border: 1.5px solid #fbb03b;
+  color: #fbb03b;
+  background: #474747;
+  transform: translateY(-3px) scale(1.05);
+  z-index: 2;
+}
+.footer-link-card:hover span, .footer-link-card:hover img {
+  filter: brightness(1.2) drop-shadow(0 2px 8px #fbb03b44);
+}
+@media (max-width: 800px) {
+  .footer-links-grid-modern {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.3rem 0.2rem;
+    max-width: 100%;
+  }
+  .footer-link-card {
+    font-size: 0.99rem;
+    padding: 0.7rem 0.5rem;
+    border-radius: 0.85rem;
+    min-height: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .footer-links-grid-modern {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 0.3rem 0.2rem;
+    max-width: 100%;
+  }
+  .footer-link-card {
+    font-size: 0.93rem;
+    padding: 0.6rem 0.2rem;
+    border-radius: 0.7rem;
+    min-height: 38px;
+  }
+}
+
+.footer-link-card:hover, .footer-link-card:focus {
+  box-shadow: 0 8px 32px #fbb03b55;
+  border: 1.5px solid #fbb03b;
+  color: #fbb03b;
+  background: #474747;
+  transform: translateY(-3px) scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .footer-links-grid-modern {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 0.3rem 0.2rem;
+  }
+  .footer-link-card {
+    font-size: 0.97rem;
+    padding: 0.7rem 0.2rem;
+    border-radius: 0.85rem;
+    min-height: 40px;
+  }
+  .whatsapp-float-btn {
+    bottom: 56px;
+  }
+  }
+
+  .footer-links-grid {
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+  .footer-main-logo {
+    max-width: 140px;
+    margin-bottom: 0.7rem;
+  }
+  .footer-pay-logos img {
+    height: 26px;
+  }
+}

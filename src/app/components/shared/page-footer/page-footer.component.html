@@ -1,0 +1,43 @@
+<footer class="footer-bueno">
+  <div class="footer-content animated-footer">
+    <div class="footer-logo-center">
+      <img src="assets/logo/logo-white.png" alt="Logo BuenoHotel" class="footer-main-logo" />
+    </div>
+    <div class="footer-links-grid-modern">
+      <a href="https://www.buenohotel.com" class="footer-link-card" target="_blank"><span>🏨</span>Conócenos</a>
+      <a href="https://booking.buenohotel.com.do" class="footer-link-card" target="_blank"><span>🗺️</span>Encuentra tu destino</a>
+      <a href="/contactos" class="footer-link-card"><span>✉️</span>Contacto</a>
+      <a href="https://facebook.com/BuenohotelSRL" class="footer-link-card" target="_blank"><span><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="width: 1.3em; height: 1.3em; vertical-align: middle; background: #fff; border-radius: 50%; box-shadow: 0 2px 8px #0002; padding: 4px;"/></span>Facebook</a>
+      <a href="https://instagram.com/buenohotel" class="footer-link-card" target="_blank"><span><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="width: 1.3em; height: 1.3em; vertical-align: middle; background: #fff; border-radius: 50%; box-shadow: 0 2px 8px #0002; padding: 4px;"/></span>Instagram</a>
+      <a href="/ofertas" class="footer-link-card"><span>💸</span>Ofertas</a>
+      <a href="/servicios" class="footer-link-card"><span>🛎️</span>Servicios</a>
+      <a href="/categorias" class="footer-link-card"><span>📂</span>Categorías</a>
+      <a href="/" class="footer-link-card"><span>🏠</span>Volver al Inicio</a>
+    </div>
+    <div class="footer-separator"></div>
+    <div class="footer-pay-contact">
+      <div class="footer-pay-logos">
+  <span style="color: #fff; font-size: 1.05em; margin-right: 1.2rem;">Aceptamos pagos de:</span>
+  <img class="pay-logo zoomable" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" (click)="openLogoModal('mastercard')" />
+  <img class="pay-logo zoomable" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" (click)="openLogoModal('visa')" />
+</div>
+<!-- Modal para mostrar el logo ampliado -->
+<div class="footer-logo-modal" *ngIf="showLogoModal" (click)="closeLogoModal()">
+  <div class="footer-logo-modal-content" (click)="$event.stopPropagation()">
+    <img *ngIf="modalLogo === 'mastercard'" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" />
+    <img *ngIf="modalLogo === 'visa'" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" />
+    <span class="footer-logo-modal-close" (click)="closeLogoModal()">&times;</span>
+  </div>
+</div>
+      <div class="footer-contact-info">
+        <span class="footer-contact-label">Correo:</span> <a class="footer-contact-mail" href="mailto:info&#64;buenohotel.com">info&#64;buenohotel.com</a>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2025 Ecommerce BuenoHotel. Todos los derechos reservados.
+    </div>
+    <div class="footer-legal">
+      <a href="/politicas" class="footer-legal-link">Términos & Condiciones</a>
+    </div>
+  </div>
+</footer>
