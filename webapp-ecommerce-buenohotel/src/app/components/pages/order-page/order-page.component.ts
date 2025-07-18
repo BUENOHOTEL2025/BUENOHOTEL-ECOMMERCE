@@ -59,6 +59,7 @@ export class OrderPageComponent implements OnInit {
       this.orden.HotelSearchCode = params['HotelSearchCode'];
       this.orden.CxlDeadLine = params['CxlDeadLine'];
       this.orden.TourName = params['TourName'];
+      this.orden.OrderNumber = params['OrderNumber'];
     });
   }
 }
