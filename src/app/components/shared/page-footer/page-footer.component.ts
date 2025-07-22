@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
+export type FooterLogoType = 'mastercard-id' | 'visa-id' | 'mastercard-classic' | 'visa-classic';
+
 @Component({
   selector: 'app-page-footer',
   standalone: true,
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PageFooterComponent {
   showLogoModal = false;
-  modalLogo: 'mastercard' | 'visa' | null = null;
+  modalLogo: FooterLogoType | null = null;
 
   constructor(public router: Router) {}
 
@@ -20,7 +22,7 @@ export class PageFooterComponent {
     return this.router.url === path || this.router.url.startsWith(path + '/');
   }
 
-  openLogoModal(logo: 'mastercard' | 'visa') {
+  openLogoModal(logo: FooterLogoType) {
     this.modalLogo = logo;
     this.showLogoModal = true;
   }
@@ -30,4 +32,3 @@ export class PageFooterComponent {
     this.modalLogo = null;
   }
 }
-

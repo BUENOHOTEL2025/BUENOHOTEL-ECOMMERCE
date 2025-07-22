@@ -17,15 +17,21 @@
     <div class="footer-separator"></div>
     <div class="footer-pay-contact">
       <div class="footer-pay-logos">
-  <span style="color: #fff; font-size: 1.05em; margin-right: 1.2rem;">Aceptamos pagos de:</span>
-  <img class="pay-logo zoomable" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" (click)="openLogoModal('mastercard')" />
-  <img class="pay-logo zoomable" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" (click)="openLogoModal('visa')" />
+  <span style="color: #fff; font-size: 1.05em; margin-right: 1.2rem;">Autorizados por:</span>
+  <img class="pay-logo zoomable" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" (click)="openLogoModal('mastercard-id')" />
+  <img class="pay-logo zoomable" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" (click)="openLogoModal('visa-id')" />
+  <br>
+  <span style="color: #fff; font-size: 1.05em; margin-right: 1.2rem; margin-top: 8px; display: inline-block;">Aceptamos pagos de:</span>
+  <img class="pay-logo zoomable" src="assets/logo/Visa-Logo-2005.jpg" alt="Visa" style="height: 32px; margin-right: 12px; background: #fff; border-radius: 6px; padding: 2px 8px;" (click)="openLogoModal('visa-classic')" />
+  <img class="pay-logo zoomable" src="assets/logo/mastercard-logo.jpg" alt="Mastercard" style="height: 32px; background: #fff; border-radius: 6px; padding: 2px 8px;" (click)="openLogoModal('mastercard-classic')" />
 </div>
 <!-- Modal para mostrar el logo ampliado -->
 <div class="footer-logo-modal" *ngIf="showLogoModal" (click)="closeLogoModal()">
   <div class="footer-logo-modal-content" (click)="$event.stopPropagation()">
-    <img *ngIf="modalLogo === 'mastercard'" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" />
-    <img *ngIf="modalLogo === 'visa'" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" />
+    <img *ngIf="modalLogo === 'mastercard-id'" src="assets/logo/mastercardidentitycheck.png" alt="Mastercard Identity Check" />
+    <img *ngIf="modalLogo === 'visa-id'" src="assets/logo/visa-secure_blu_2021.png" alt="Visa Secure" />
+    <img *ngIf="modalLogo === 'visa-classic'" src="assets/logo/Visa-Logo-2005.jpg" alt="Visa" />
+    <img *ngIf="modalLogo === 'mastercard-classic'" src="assets/logo/mastercard-logo.jpg" alt="Mastercard" />
     <span class="footer-logo-modal-close" (click)="closeLogoModal()">&times;</span>
   </div>
 </div>
