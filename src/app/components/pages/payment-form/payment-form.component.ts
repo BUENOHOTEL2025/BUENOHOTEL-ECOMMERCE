@@ -23,11 +23,16 @@ export class PaymentFormComponent implements OnInit {
     }
   }
 
+  // privateKey =
+  //   'asdhakjshdkjasdasmndajksdkjaskldga8odya9d8yoasyd98asdyaisdhoaisyd0a8sydoashd8oasydoiahdpiashd09ayusidhaos8dy0a8dya08syd0a8ssdsax'; //dev
+
   privateKey =
-    'asdhakjshdkjasdasmndajksdkjaskldga8odya9d8yoasyd98asdyaisdhoaisyd0a8sydoashd8oasydoiahdpiashd09ayusidhaos8dy0a8dya08syd0a8ssdsax';
+    'sZ0sTp9mNLRcLcWTuJPdQ7KytTvScmxA8GHT5PHQd1o9A2ss0OHtQVykvfBg5rtjvWve0Xed2crBeFbmX9SVe3Mgk6YHKbHuK3DN2Q56gDnFHFKsYwAhSxD6DYBC8fCK'; //prod
+
   authHash: string | undefined;
 
-  MerchantId = '39038540035';
+  // MerchantId = '39038540035'; // dev
+  MerchantId = '39424290013'; //prod
   MerchantName = 'Buenohotel';
   MerchantType = 'ECommerce';
   CurrencyCode = '$';
@@ -50,7 +55,9 @@ export class PaymentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.Amount = this.getFormattedPrice(this.orden.TotalPrice);
-    this.ITBIS = Math.round((parseInt(this.Amount) / 100 / 1.18) * 0.18 * 100).toString();
+    this.ITBIS = Math.round(
+      (parseInt(this.Amount) / 100 / 1.18) * 0.18 * 100
+    ).toString();
     this.OrderNumber = this.orden.OrderNumber;
 
     const data = `${this.MerchantId}${this.MerchantName}${this.MerchantType}${this.CurrencyCode}${this.OrderNumber}${this.Amount}${this.ITBIS}${this.ApprovedUrl}${this.DeclinedUrl}${this.CancelUrl}${this.UseCustomField1}${this.CustomField1Label}${this.CustomField1Value}${this.UseCustomField2}${this.CustomField2Label}${this.CustomField2Value}${this.privateKey}`;
