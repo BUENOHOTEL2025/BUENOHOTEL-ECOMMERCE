@@ -177,7 +177,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
       JSON.stringify(bookingDataForEmail)
     );
 
-    window.location.href = `https://booking.buenohotel.com.do/email/voucher-details?bookingData=${encodedBookingData}`;
+    window.location.href = `https://develop-booking.buenohotel.com.do/email/voucher-details?bookingData=${encodedBookingData}`;
   }
 
   // ==================================================================
@@ -251,6 +251,6 @@ export class TransaccionAprobadaPageComponent implements OnInit {
     };
 
     const encodedBookingData = encodeURIComponent(JSON.stringify(bookingData));
-    window.location.href = `https://booking.buenohotel.com.do/email/tour-payment-confirmation?bookingData=${encodedBookingData}`;
+    window.location.href = `https://develop-booking.buenohotel.com.do/email/tour-payment-confirmation?bookingData=${encodedBookingData}`;
   }
 }
