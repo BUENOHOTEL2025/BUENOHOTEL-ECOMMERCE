@@ -2,33 +2,51 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-interface ApiResponse {
+// --- Interface for Tour API Response (Unchanged) ---
+interface TourApiResponse {
   ok: boolean;
   message: string;
   data: {
     totalPrice: string;
-    pricePerPerson: number;
-    createdAt: string;
-    email: string;
     name: string;
+    email: string;
     persons: number;
     reservationCode: string;
     hotel: string;
     date: string;
-    customerType: string;
-    updatedAt: string;
+    AzulAprobacion: { AzulOrderId: string; Amount: string };
+    tour: string;
+  };
+}
+
+// --- CORRECTED Interface for Booking API Response ---
+interface BookingApiResponse {
+  ok: boolean;
+  message: string;
+  data: {
+    uuid: string;
+    hotel: string; // Correct field name
+    email: string; // Correct location
+    arrivalDate: string;
+    nights: number;
+    leader: {
+      LeaderPersonID: string; // Correct structure
+    };
+    rooms: {
+      Rooms: {
+        Persons: {
+          PersonID: string;
+          FirstName: string;
+          LastName: string;
+          Title: string;
+        }[];
+      }[];
+    }[];
     AzulAprobacion: {
-      ErrorDescription: string;
-      CardNumber: string;
       AzulOrderId: string;
       Amount: string;
-      OrderNumber: string;
-      Itbis: string;
-      ResponseMessage: string;
-      DateTime: string;
     };
-    uuid: string;
-    tour: string;
+    bookingCode: string;
   };
 }
 
@@ -40,49 +58,27 @@ interface ApiResponse {
   styleUrl: './transaccion-aprobada-page.component.scss',
 })
 export class TransaccionAprobadaPageComponent implements OnInit {
-  order: any = {
-    OrderNumber: '',
-    Amount: '',
-    Itbis: '',
-    AuthorizationCode: '',
-    DateTime: '',
-    ResponseCode: '',
-    IsoCode: '',
-    ResponseMessage: '',
-    ErrorDescription: '',
-    RRN: '',
-    AuthHash: '',
-    CustomOrderId: '',
-    CardNumber: '',
-    DataVaultToken: '',
-    DataVaultExpiration: '',
-    DataVaultBrand: '',
-    AzulOrderId: '',
-    DCCOffered: '',
-    DCCApplied: '',
-    DCCCurrency: '',
-    DCCCurrencyAlpha: '',
-    DCCExchangeRate: '',
-    DCCMarkup: '',
-    DCCAmount: '',
-    Discounted: '',
-  };
+  order: any = {};
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      Object.keys(this.order).forEach((key) => {
-        if (params[key]) {
-          this.order[key] = params[key];
-        }
-      });
+      this.order = { ...params };
 
-      this.updateOrderWithPaymentData();
+      if (params['tourName']) {
+        this.updateTourOrderWithPaymentData();
+      } else {
+        this.updateBookingOrderWithPaymentData();
+      }
     });
   }
 
-  updateOrderWithPaymentData(): void {
+  // ==================================================================
+  // LOGIC FOR HOTEL BOOKINGS
+  // ==================================================================
+
+  updateBookingOrderWithPaymentData(): void {
     const paymentData = {
       uuid: this.order.OrderNumber,
       AzulAprobacion: {
@@ -98,19 +94,132 @@ export class TransaccionAprobadaPageComponent implements OnInit {
     };
 
     this.http
-      .patch<ApiResponse>(`https://api-tours.buenohotel.com.do/reservations`, paymentData)
+      .patch<BookingApiResponse>(
+        `https://api-booking.buenohotel.com.do/reservations`,
+        paymentData
+      )
       .subscribe({
         next: (response) => {
-          console.log('Order updated successfully', response);
-          this.redirectToEmailConfirmation(response.data);
+          console.log('Booking order updated successfully', response);
+          if (response.ok && response.data) {
+            this.redirectToBookingEmailConfirmation(response.data);
+          }
         },
         error: (error) => {
-          console.error('Error updating order', error);
+          console.error('Error updating booking order', error);
         },
       });
   }
-  redirectToEmailConfirmation(reservationData: any): void {
-    // Format the date for display
+
+  redirectToBookingEmailConfirmation(
+    reservationData: BookingApiResponse['data']
+  ): void {
+    const checkInDate = new Date(reservationData.arrivalDate);
+    const checkOutDate = new Date(checkInDate);
+    checkOutDate.setDate(checkOutDate.getDate() + reservationData.nights);
+
+    const formatDate = (date: Date) => {
+      return date
+        .toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: '2-digit',
+        })
+        .replace(/ /g, '/');
+    };
+
+    const allPersons = (reservationData.rooms || [])
+      .flatMap((room) => room.Rooms || [])
+      .flatMap((innerRoom) => innerRoom.Persons || [])
+      .filter((person) => person);
+
+    const guestsList = allPersons
+      .map((person) => `${person.FirstName} ${person.LastName} ${person.Title}`)
+      .join(', ');
+
+    const leaderInfo = allPersons.find(
+      (p) => p.PersonID === reservationData.leader.LeaderPersonID
+    );
+    const clientName = leaderInfo
+      ? `${leaderInfo.FirstName} ${leaderInfo.LastName}`.trim()
+      : 'Valued Customer';
+
+    const recipientEmail = reservationData.email;
+
+    if (!recipientEmail) {
+      console.error(
+        'Cannot send email confirmation: Recipient email not found in API response.'
+      );
+      return;
+    }
+
+    const bookingDataForEmail = {
+      clientName: clientName,
+      hotelName: reservationData.hotel, // Use correct field 'hotel'
+      bookingId: reservationData.bookingCode,
+      checkIn: formatDate(checkInDate),
+      checkOut: formatDate(checkOutDate),
+      guests: guestsList,
+      paymentDate: new Date()
+        .toLocaleDateString('en-US', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        })
+        .replace(',', ''),
+      paymentMethod: 'Credit Card',
+      paymentAmount: reservationData.AzulAprobacion.Amount,
+      paymentReference: reservationData.AzulAprobacion.AzulOrderId,
+      recipientEmail: recipientEmail,
+    };
+
+    const encodedBookingData = encodeURIComponent(
+      JSON.stringify(bookingDataForEmail)
+    );
+
+    window.location.href = `https://booking.buenohotel.com.do/email/voucher-details?bookingData=${encodedBookingData}`;
+  }
+
+  // ==================================================================
+  // LOGIC FOR TOURS (Unchanged)
+  // ==================================================================
+
+  updateTourOrderWithPaymentData(): void {
+    const paymentData = {
+      uuid: this.order.OrderNumber,
+      AzulAprobacion: {
+        OrderNumber: this.order.OrderNumber,
+        Amount: this.order.Amount,
+        Itbis: this.order.Itbis,
+        DateTime: this.order.DateTime,
+        ResponseMessage: this.order.ResponseMessage,
+        ErrorDescription: this.order.ErrorDescription,
+        CardNumber: this.order.CardNumber,
+        AzulOrderId: this.order.AzulOrderId,
+      },
+    };
+
+    this.http
+      .patch<TourApiResponse>(
+        `https://api-tours.buenohotel.com.do/reservations`,
+        paymentData
+      )
+      .subscribe({
+        next: (response) => {
+          console.log('Tour order updated successfully', response);
+          if (response.ok) {
+            this.redirectToTourEmailConfirmation(response.data);
+          }
+        },
+        error: (error) => {
+          console.error('Error updating tour order', error);
+        },
+      });
+  }
+
+  redirectToTourEmailConfirmation(
+    reservationData: TourApiResponse['data']
+  ): void {
     const tourDate = new Date(reservationData.date);
     const formattedDate = tourDate
       .toLocaleDateString('en-US', {
@@ -120,7 +229,6 @@ export class TransaccionAprobadaPageComponent implements OnInit {
       })
       .replace(',', '');
 
-    // Create booking data object
     const bookingData = {
       clientName: reservationData.name,
       tourDate: formattedDate,
@@ -136,15 +244,13 @@ export class TransaccionAprobadaPageComponent implements OnInit {
         })
         .replace(',', ''),
       paymentMethod: 'Credit Card',
-      paymentAmount: reservationData.totalPrice,
+      paymentAmount: reservationData.AzulAprobacion.Amount,
       paymentReference: reservationData.AzulAprobacion.AzulOrderId,
       recipientEmail: reservationData.email,
       tourName: reservationData.tour,
     };
 
     const encodedBookingData = encodeURIComponent(JSON.stringify(bookingData));
-
-    // window.location.href = `http://localhost:62746/email/tour-payment-confirmation?bookingData=${encodedBookingData}`;
     window.location.href = `https://booking.buenohotel.com.do/email/tour-payment-confirmation?bookingData=${encodedBookingData}`;
   }
 }
