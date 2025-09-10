@@ -47,6 +47,7 @@ interface BookingApiResponse {
       Amount: string;
     };
     bookingCode: string;
+    bookingReference: string;
   };
 }
 
@@ -157,6 +158,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
       clientName: clientName,
       hotelName: reservationData.hotel, // Use correct field 'hotel'
       bookingId: reservationData.bookingCode,
+      bookingReference: reservationData.bookingReference,
       checkIn: formatDate(checkInDate),
       checkOut: formatDate(checkOutDate),
       guests: guestsList,
