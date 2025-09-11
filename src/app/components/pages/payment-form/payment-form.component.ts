@@ -39,9 +39,9 @@ export class PaymentFormComponent implements OnInit {
   OrderNumber = '';
   Amount = '';
   ITBIS = '';
-  ApprovedUrl = 'https://ecommerce.buenohotel.com.do/aprobada/';
-  DeclinedUrl = 'https://ecommerce.buenohotel.com.do/declinada/';
-  CancelUrl = 'https://ecommerce.buenohotel.com.do/cancelada/';
+  ApprovedUrl = 'https://develop-ecommerce.buenohotel.com.do/aprobada/';
+  DeclinedUrl = 'https://develop-ecommerce.buenohotel.com.do/declinada/';
+  CancelUrl = 'https://develop-ecommerce.buenohotel.com.do/cancelada/';
   UseCustomField1 = '0';
   CustomField1Label = 'CustomField1Label';
   CustomField1Value = 'CustomField1Value';
