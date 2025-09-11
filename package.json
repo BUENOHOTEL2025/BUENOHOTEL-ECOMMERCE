@@ -8,7 +8,8 @@
     "deploy": "aws s3 sync dist/webapp-ecommerce-buenohotel/browser s3://develop-ecommerce-buenohotel-com-do-website-bucket --delete && aws cloudfront create-invalidation --distribution-id E3FW0TEALISQQ0 --paths \"/*\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:webapp-ecommerce-buenohotel": "node dist/webapp-ecommerce-buenohotel/server/server.mjs"
+    "serve:ssr:webapp-ecommerce-buenohotel": "node dist/webapp-ecommerce-buenohotel/server/server.mjs",
+    "build-and-deploy": "npm run build && npm run deploy"
   },
   "private": true,
   "dependencies": {
