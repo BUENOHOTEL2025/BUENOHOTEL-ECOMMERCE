@@ -5,16 +5,17 @@ import { PaymentFormComponent } from '@pages/payment-form/payment-form.component
 import { CardsLogosComponent } from '@shared/cards-logos/cards-logos.component';
 import { PageHeaderComponent } from '@shared/page-header/page-header.component';
 import { CurrencyService, CurrencyPipe } from '@core';
+import { TasaCambioService } from '@services/tasa-cambio.service';
 
 @Component({
   selector: 'app-order-page',
   standalone: true,
   imports: [
-    CommonModule, 
-    PaymentFormComponent, 
-    CardsLogosComponent, 
+    CommonModule,
+    PaymentFormComponent,
+    CardsLogosComponent,
     PageHeaderComponent,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   templateUrl: './order-page.component.html',
   styleUrl: './order-page.component.scss',
@@ -37,9 +38,12 @@ export class OrderPageComponent implements OnInit {
     TourName: 'Isla Saona',
   };
 
+  totalPriceDop = 0;
+
   constructor(
     private route: ActivatedRoute,
-    private currencyService: CurrencyService
+    private currencyService: CurrencyService,
+    private tasaCambioService: TasaCambioService,
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +53,7 @@ export class OrderPageComponent implements OnInit {
       this.orden.Location = params['Location'];
       this.orden.Rooms = params['Rooms'];
       this.orden.Currency = params['Currency'];
-      this.orden.TotalPrice = params['TotalPrice'];
+      this.orden.TotalPrice = Number(params['TotalPrice']);
       this.orden.checkIn = params['checkIn'];
       this.orden.nigths = params['nigths'];
       this.orden.RoomsQty = params['RoomsQty'];
@@ -60,6 +64,16 @@ export class OrderPageComponent implements OnInit {
       this.orden.CxlDeadLine = params['CxlDeadLine'];
       this.orden.TourName = params['TourName'];
       this.orden.OrderNumber = params['OrderNumber'];
+    });
+    this.calcularTotalDop();
+  }
+
+  private calcularTotalDop(): void {
+    if (!this.orden?.TotalPrice) return;
+
+    this.tasaCambioService.getTasaUsdToDop().subscribe((tasa) => {
+      if (!tasa) return;
+      this.totalPriceDop = this.orden.TotalPrice * tasa;
     });
   }
 }

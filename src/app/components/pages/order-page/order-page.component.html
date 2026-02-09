@@ -2,150 +2,148 @@
   <app-page-header class="sticky-header"></app-page-header>
 
   @if (this.orden.TourName) {
-  <div class="container">
-    <div class="slider">
-      <div class="slider-images">
-        <img
-          [src]="this.orden.hotelImage"
-          alt="Imagen Hotel 1"
-          class="slider-image active"
-        />
-        <img
-          src="https://destify.com/wp-content/uploads/2022/06/Dreams-Macao_Beach-Ocean-View-scaled.jpg"
-          alt="Imagen Hotel 2"
-          class="slider-image"
-        />
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/11/fb/06/0f/sunscape-bavaro-beach.jpg"
-          alt="Imagen Hotel 3"
-          class="slider-image"
-        />
-        <img
-          src="https://res.cloudinary.com/itermotus/q_auto:low,f_auto,w_1200,h_800,c_fit/hotel/grandmiramar/1/a95ab0d8-d-gobernador-7.jpg"
-          alt="Imagen Hotel 4"
-          class="slider-image"
-        />
+    <div class="container">
+      <div class="slider">
+        <div class="slider-images">
+          <img
+            [src]="this.orden.hotelImage"
+            alt="Imagen Hotel 1"
+            class="slider-image active"
+          />
+          <img
+            src="https://destify.com/wp-content/uploads/2022/06/Dreams-Macao_Beach-Ocean-View-scaled.jpg"
+            alt="Imagen Hotel 2"
+            class="slider-image"
+          />
+          <img
+            src="https://media-cdn.tripadvisor.com/media/photo-s/11/fb/06/0f/sunscape-bavaro-beach.jpg"
+            alt="Imagen Hotel 3"
+            class="slider-image"
+          />
+          <img
+            src="https://res.cloudinary.com/itermotus/q_auto:low,f_auto,w_1200,h_800,c_fit/hotel/grandmiramar/1/a95ab0d8-d-gobernador-7.jpg"
+            alt="Imagen Hotel 4"
+            class="slider-image"
+          />
+        </div>
+        <div class="slider-buttons">
+          <input type="radio" name="slider" id="slide1" checked />
+          <input type="radio" name="slider" id="slide2" checked />
+          <input type="radio" name="slider" id="slide3" />
+          <input type="radio" name="slider" id="slide4" />
+          <label for="slide1">1</label>
+          <label for="slide2">2</label>
+          <label for="slide3">3</label>
+          <label for="slide4">4</label>
+        </div>
       </div>
-      <div class="slider-buttons">
-        <input type="radio" name="slider" id="slide1" checked />
-        <input type="radio" name="slider" id="slide2" checked />
-        <input type="radio" name="slider" id="slide3" />
-        <input type="radio" name="slider" id="slide4" />
-        <label for="slide1">1</label>
-        <label for="slide2">2</label>
-        <label for="slide3">3</label>
-        <label for="slide4">4</label>
-      </div>
-    </div>
 
-    <div class="room">
-      <h2 style="color: #fbb03b">
-        {{ this.orden.TourName }}
-      </h2>
-      <p>
-        <strong>
-          {{ this.orden.Currency }}
-          {{ this.orden.TotalPrice | currency : "USD" : "symbol" : "1.2-2" }} |
-          {{
-            this.orden.TotalPrice * 61 | currency : "DOP" : "symbol" : "1.2-2"
-          }}
-        </strong>
-      </p>
-      <div class="room-options">
-        <label
-          ><strong>Fecha de Llegada:</strong> {{ this.orden.checkIn }}</label
-        ><br />
-        <label
-          ><strong>Cantidad de Adultos:</strong>
-          {{ this.orden.AdultsQty }}</label
-        ><br />
+      <div class="room">
+        <h2 style="color: #fbb03b">
+          {{ this.orden.TourName }}
+        </h2>
+        <p>
+          <strong>
+            {{ orden.Currency }}
+            {{ orden.TotalPrice | currency: "USD" : "symbol" : "1.2-2" }}
+            |
+            {{ totalPriceDop | currency: "DOP" : "symbol" : "1.2-2" }}
+          </strong>
+        </p>
+        <div class="room-options">
+          <label
+            ><strong>Fecha de Llegada:</strong> {{ this.orden.checkIn }}</label
+          ><br />
+          <label
+            ><strong>Cantidad de Adultos:</strong>
+            {{ this.orden.AdultsQty }}</label
+          ><br />
+        </div>
+        <br />
+        <app-payment-form [orden]="orden"></app-payment-form>
       </div>
-      <br />
-      <app-payment-form [orden]="orden"></app-payment-form>
     </div>
-  </div>
   } @else {
-  <div class="container">
-    <div class="slider">
-      <div class="slider-images">
-        <img
-          [src]="this.orden.hotelImage"
-          alt="Imagen Hotel 1"
-          class="slider-image active"
-        />
-        <img
-          src="https://destify.com/wp-content/uploads/2022/06/Dreams-Macao_Beach-Ocean-View-scaled.jpg"
-          alt="Imagen Hotel 2"
-          class="slider-image"
-        />
-        <img
-          src="https://media-cdn.tripadvisor.com/media/photo-s/11/fb/06/0f/sunscape-bavaro-beach.jpg"
-          alt="Imagen Hotel 3"
-          class="slider-image"
-        />
-        <img
-          src="https://res.cloudinary.com/itermotus/q_auto:low,f_auto,w_1200,h_800,c_fit/hotel/grandmiramar/1/a95ab0d8-d-gobernador-7.jpg"
-          alt="Imagen Hotel 4"
-          class="slider-image"
-        />
+    <div class="container">
+      <div class="slider">
+        <div class="slider-images">
+          <img
+            [src]="this.orden.hotelImage"
+            alt="Imagen Hotel 1"
+            class="slider-image active"
+          />
+          <img
+            src="https://destify.com/wp-content/uploads/2022/06/Dreams-Macao_Beach-Ocean-View-scaled.jpg"
+            alt="Imagen Hotel 2"
+            class="slider-image"
+          />
+          <img
+            src="https://media-cdn.tripadvisor.com/media/photo-s/11/fb/06/0f/sunscape-bavaro-beach.jpg"
+            alt="Imagen Hotel 3"
+            class="slider-image"
+          />
+          <img
+            src="https://res.cloudinary.com/itermotus/q_auto:low,f_auto,w_1200,h_800,c_fit/hotel/grandmiramar/1/a95ab0d8-d-gobernador-7.jpg"
+            alt="Imagen Hotel 4"
+            class="slider-image"
+          />
+        </div>
+        <div class="slider-buttons">
+          <input type="radio" name="slider" id="slide1" checked />
+          <input type="radio" name="slider" id="slide2" checked />
+          <input type="radio" name="slider" id="slide3" />
+          <input type="radio" name="slider" id="slide4" />
+          <label for="slide1">1</label>
+          <label for="slide2">2</label>
+          <label for="slide3">3</label>
+          <label for="slide4">4</label>
+        </div>
       </div>
-      <div class="slider-buttons">
-        <input type="radio" name="slider" id="slide1" checked />
-        <input type="radio" name="slider" id="slide2" checked />
-        <input type="radio" name="slider" id="slide3" />
-        <input type="radio" name="slider" id="slide4" />
-        <label for="slide1">1</label>
-        <label for="slide2">2</label>
-        <label for="slide3">3</label>
-        <label for="slide4">4</label>
-      </div>
-    </div>
 
-    <div class="room">
-      <h2 style="color: #fbb03b">
-        {{ this.orden.hotelName }}, {{ this.orden.Location }},
-        {{ this.orden.Rooms }}
-      </h2>
-      <p>
-        <strong>
-          {{ this.orden.Currency }}
-          {{ this.orden.TotalPrice | currency : "USD" : "symbol" : "1.2-2" }} |
-          {{
-            this.orden.TotalPrice * 61 | currency : "DOP" : "symbol" : "1.2-2"
-          }}
-        </strong>
-      </p>
-      <div class="room-options">
-        <label
-          ><strong>Fecha de Llegada:</strong> {{ this.orden.checkIn }}</label
-        ><br />
-        <label
-          ><strong>Cantidad de Noches:</strong> {{ this.orden.nigths }}</label
-        ><br />
-        <label
-          ><strong>Cantidad de Habitaciones:</strong>
-          {{ this.orden.RoomsQty }}</label
-        ><br />
-        <label
-          ><strong>Cantidad de Adultos:</strong>
-          {{ this.orden.AdultsQty }}</label
-        ><br />
-        <label
-          ><strong>Cantidad de Niños:</strong> {{ this.orden.ChildQty }}</label
-        ><br />
-        <label
-          ><strong>Edades de los Niños:</strong>
-          {{ this.orden.ChildAges }}</label
-        ><br />
+      <div class="room">
+        <h2 style="color: #fbb03b">
+          {{ this.orden.hotelName }}, {{ this.orden.Location }},
+          {{ this.orden.Rooms }}
+        </h2>
+        <p>
+          <strong>
+            {{ orden.Currency }}
+            {{ orden.TotalPrice | currency: "USD" : "symbol" : "1.2-2" }}
+            |
+            {{ totalPriceDop | currency: "DOP" : "symbol" : "1.2-2" }}
+          </strong>
+        </p>
+        <div class="room-options">
+          <label
+            ><strong>Fecha de Llegada:</strong> {{ this.orden.checkIn }}</label
+          ><br />
+          <label
+            ><strong>Cantidad de Noches:</strong> {{ this.orden.nigths }}</label
+          ><br />
+          <label
+            ><strong>Cantidad de Habitaciones:</strong>
+            {{ this.orden.RoomsQty }}</label
+          ><br />
+          <label
+            ><strong>Cantidad de Adultos:</strong>
+            {{ this.orden.AdultsQty }}</label
+          ><br />
+          <label
+            ><strong>Cantidad de Niños:</strong>
+            {{ this.orden.ChildQty }}</label
+          ><br />
+          <label
+            ><strong>Edades de los Niños:</strong>
+            {{ this.orden.ChildAges }}</label
+          ><br />
+        </div>
+        <br />
+        <label style="color: red"
+          ><strong>Fecha Límite de Cancelación:</strong>
+          {{ this.orden.CxlDeadLine }}</label
+        ><br /><br />
+        <app-payment-form [orden]="orden"></app-payment-form>
       </div>
-      <br />
-      <label style="color: red"
-        ><strong>Fecha Límite de Cancelación:</strong>
-        {{ this.orden.CxlDeadLine }}</label
-      ><br /><br />
-      <app-payment-form [orden]="orden"></app-payment-form>
     </div>
-  </div>
   }
-
 </div>

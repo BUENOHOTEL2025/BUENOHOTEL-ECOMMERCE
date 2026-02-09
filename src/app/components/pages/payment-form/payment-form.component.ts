@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EncryptionService } from '@services/encryption.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TasaCambioService } from '@services/tasa-cambio.service';
 
 @Component({
   selector: 'app-payment-form',
@@ -51,24 +52,43 @@ export class PaymentFormComponent implements OnInit {
 
   submit = 'Realizar Pago';
 
-  constructor(private encryptionService: EncryptionService) {}
+  tasaCambio = 0;
+
+  constructor(
+    private encryptionService: EncryptionService,
+    private tasaCambioService: TasaCambioService,
+  ) {}
 
   ngOnInit(): void {
-    this.Amount = this.getFormattedPrice(this.orden.TotalPrice);
-    this.ITBIS = Math.round(
-      (parseInt(this.Amount) / 100 / 1.18) * 0.18 * 100
-    ).toString();
-    this.OrderNumber = this.orden.OrderNumber;
+    this.tasaCambioService.getTasaUsdToDop().subscribe({
+      next: (tasa) => {
+        this.tasaCambio = tasa;
 
+        this.Amount = this.getFormattedPrice(this.orden.TotalPrice);
+        this.ITBIS = Math.round(
+          (parseInt(this.Amount) / 100 / 1.18) * 0.18 * 100,
+        ).toString();
+
+        this.OrderNumber = this.orden.OrderNumber;
+        this.generateAuthHash();
+      },
+      error: (err) => {
+        console.error('Error obteniendo tasa de cambio', err);
+      },
+    });
+  }
+
+  private generateAuthHash() {
     const data = `${this.MerchantId}${this.MerchantName}${this.MerchantType}${this.CurrencyCode}${this.OrderNumber}${this.Amount}${this.ITBIS}${this.ApprovedUrl}${this.DeclinedUrl}${this.CancelUrl}${this.UseCustomField1}${this.CustomField1Label}${this.CustomField1Value}${this.UseCustomField2}${this.CustomField2Label}${this.CustomField2Value}${this.privateKey}`;
+
     this.authHash = this.encryptionService.generateAuthHash(
       data,
-      this.privateKey
+      this.privateKey,
     );
   }
 
   getFormattedPrice(price: number): string {
-    return Math.round(price * 100 * 61).toString();
+    return Math.round(price * 100 * this.tasaCambio).toString();
   }
 
   onSubmit() {
