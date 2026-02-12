@@ -24,25 +24,25 @@ export class PaymentFormComponent implements OnInit {
     }
   }
 
-  privateKey =
-    'asdhakjshdkjasdasmndajksdkjaskldga8odya9d8yoasyd98asdyaisdhoaisyd0a8sydoashd8oasydoiahdpiashd09ayusidhaos8dy0a8dya08syd0a8ssdsax'; //dev
-
   // privateKey =
-  //   'sZ0sTp9mNLRcLcWTuJPdQ7KytTvScmxA8GHT5PHQd1o9A2ss0OHtQVykvfBg5rtjvWve0Xed2crBeFbmX9SVe3Mgk6YHKbHuK3DN2Q56gDnFHFKsYwAhSxD6DYBC8fCK'; //prod
+  //   'asdhakjshdkjasdasmndajksdkjaskldga8odya9d8yoasyd98asdyaisdhoaisyd0a8sydoashd8oasydoiahdpiashd09ayusidhaos8dy0a8dya08syd0a8ssdsax'; //dev
+
+  privateKey =
+    'sZ0sTp9mNLRcLcWTuJPdQ7KytTvScmxA8GHT5PHQd1o9A2ss0OHtQVykvfBg5rtjvWve0Xed2crBeFbmX9SVe3Mgk6YHKbHuK3DN2Q56gDnFHFKsYwAhSxD6DYBC8fCK'; //prod
 
   authHash: string | undefined;
 
-  MerchantId = '39038540035'; // dev
-  // MerchantId = '39424290013'; //prod
+  // MerchantId = '39038540035'; // dev
+  MerchantId = '39424290013'; //prod
   MerchantName = 'Buenohotel';
   MerchantType = 'ECommerce';
   CurrencyCode = '$';
   OrderNumber = '';
   Amount = '';
   ITBIS = '';
-  ApprovedUrl = 'https://develop-ecommerce.buenohotel.com.do/aprobada/';
-  DeclinedUrl = 'https://develop-ecommerce.buenohotel.com.do/declinada/';
-  CancelUrl = 'https://develop-ecommerce.buenohotel.com.do/cancelada/';
+  ApprovedUrl = 'https://ecommerce.buenohotel.com.do/aprobada/';
+  DeclinedUrl = 'https://ecommerce.buenohotel.com.do/declinada/';
+  CancelUrl = 'https://ecommerce.buenohotel.com.do/cancelada/';
   UseCustomField1 = '0';
   CustomField1Label = 'CustomField1Label';
   CustomField1Value = 'CustomField1Value';

@@ -14,6 +14,6 @@ export class TasaCambioService {
   getTasaUsdToDop(): Observable<number> {
     return this.http
       .get<any>(this.apiUrl)
-      .pipe(map((response) => response.data.tasa_cambio_usd));
+      .pipe(map((response) => response.data.tasaCambio));
   }
 }
