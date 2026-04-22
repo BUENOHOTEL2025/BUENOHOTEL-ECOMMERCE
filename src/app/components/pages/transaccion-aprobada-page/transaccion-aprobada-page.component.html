@@ -1,28 +1,90 @@
-<div>
-  <h2>Order Details</h2>
-  <p><strong>Order Number:</strong> {{ order.OrderNumber }}</p>
-  <p><strong>Amount:</strong> {{ order.Amount }}</p>
-  <p><strong>ITBIS:</strong> {{ order.Itbis }}</p>
-  <p><strong>Authorization Code:</strong> {{ order.AuthorizationCode }}</p>
-  <p><strong>Date Time:</strong> {{ order.DateTime }}</p>
-  <p><strong>Response Code:</strong> {{ order.ResponseCode }}</p>
-  <p><strong>ISO Code:</strong> {{ order.IsoCode }}</p>
-  <p><strong>Response Message:</strong> {{ order.ResponseMessage }}</p>
-  <p><strong>Error Description:</strong> {{ order.ErrorDescription }}</p>
-  <p><strong>RRN:</strong> {{ order.RRN }}</p>
-  <p><strong>Auth Hash:</strong> {{ order.AuthHash }}</p>
-  <p><strong>Custom Order ID:</strong> {{ order.CustomOrderId }}</p>
-  <p><strong>Card Number:</strong> {{ order.CardNumber }}</p>
-  <p><strong>Data Vault Token:</strong> {{ order.DataVaultToken }}</p>
-  <p><strong>Data Vault Expiration:</strong> {{ order.DataVaultExpiration }}</p>
-  <p><strong>Data Vault Brand:</strong> {{ order.DataVaultBrand }}</p>
-  <p><strong>Azul Order ID:</strong> {{ order.AzulOrderId }}</p>
-  <p><strong>DCC Offered:</strong> {{ order.DCCOffered }}</p>
-  <p><strong>DCC Applied:</strong> {{ order.DCCApplied }}</p>
-  <p><strong>DCC Currency:</strong> {{ order.DCCCurrency }}</p>
-  <p><strong>DCC Currency Alpha:</strong> {{ order.DCCCurrencyAlpha }}</p>
-  <p><strong>DCC Exchange Rate:</strong> {{ order.DCCExchangeRate }}</p>
-  <p><strong>DCC Markup:</strong> {{ order.DCCMarkup }}</p>
-  <p><strong>DCC Amount:</strong> {{ order.DCCAmount }}</p>
-  <p><strong>Discounted:</strong> {{ order.Discounted }}</p>
+<div class="container">
+  <header>
+    <h1>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        fill="currentColor"
+        class="bi bi-check-circle-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+        />
+      </svg>
+      ¡Compra Exitosa!
+    </h1>
+    <p class="success-message">
+      Tu transacción ha sido procesada con éxito. ¡Gracias por tu compra!
+    </p>
+  </header>
+
+  <div class="order-summary">
+    <h2>Resumen</h2>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <strong>Número:</strong>
+        <span>{{ order.OrderNumber }}</span>
+      </div>
+      <div class="detail-item">
+        <strong>Monto Total:</strong>
+        <span>{{
+          formatMonto(order.Amount) | currency: "USD" : "symbol" : "1.2-2"
+        }}</span>
+      </div>
+      <div class="detail-item">
+        <strong>Fecha y Hora:</strong>
+        <span>{{ formatFecha(order.DateTime) }}</span>
+      </div>
+      <div class="detail-item">
+        <strong>Autorización No.:</strong>
+        <span>{{ order.AuthorizationCode }}</span>
+      </div>
+      <div class="detail-item">
+        <strong>Respuesta:</strong>
+        <span>{{ order.ResponseMessage }}</span>
+      </div>
+      <div class="detail-item">
+        <strong>Tarjeta:</strong>
+        <span>{{ order.DataVaultBrand }} {{ order.CardNumber }}</span>
+      </div>
+      @if (order.CustomOrderId) {
+        <div class="detail-item">
+          <strong>ID de Referencia:</strong>
+          <span>{{ order.CustomOrderId }}</span>
+        </div>
+      }
+      @if (order.DataVaultToken) {
+        <div class="detail-item">
+          <strong>Token de Tarjeta:</strong>
+          <span>{{ order.DataVaultToken }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (order.DCCApplied != 0) {
+    <div class="important-details">
+      <h3>Detalles de Conversión de Moneda (DCC)</h3>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <strong>Moneda Original:</strong>
+          <span>{{ order.DCCCurrencyAlpha }} ({{ order.DCCCurrency }})</span>
+        </div>
+        <div class="detail-item">
+          <strong>Monto Original:</strong>
+          <span>{{ order.DCCAmount }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Tasa de Cambio:</strong>
+          <span>{{ order.DCCExchangeRate }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Recargo (Markup):</strong>
+          <span>{{ order.DCCMarkup }}%</span>
+        </div>
+      </div>
+    </div>
+  }
 </div>

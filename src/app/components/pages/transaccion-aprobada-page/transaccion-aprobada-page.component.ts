@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 // --- Interface for Tour API Response (Unchanged) ---
 interface TourApiResponse {
@@ -54,14 +55,17 @@ interface BookingApiResponse {
 @Component({
   selector: 'app-transaccion-aprobada-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './transaccion-aprobada-page.component.html',
   styleUrl: './transaccion-aprobada-page.component.scss',
 })
 export class TransaccionAprobadaPageComponent implements OnInit {
   order: any = {};
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -97,7 +101,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
     this.http
       .patch<BookingApiResponse>(
         `https://api-booking.buenohotel.com.do/reservations`,
-        paymentData
+        paymentData,
       )
       .subscribe({
         next: (response) => {
@@ -113,7 +117,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
   }
 
   redirectToBookingEmailConfirmation(
-    reservationData: BookingApiResponse['data']
+    reservationData: BookingApiResponse['data'],
   ): void {
     const checkInDate = new Date(reservationData.arrivalDate);
     const checkOutDate = new Date(checkInDate);
@@ -139,7 +143,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
       .join(', ');
 
     const leaderInfo = allPersons.find(
-      (p) => p.PersonID === reservationData.leader.LeaderPersonID
+      (p) => p.PersonID === reservationData.leader.LeaderPersonID,
     );
     const clientName = leaderInfo
       ? `${leaderInfo.FirstName} ${leaderInfo.LastName}`.trim()
@@ -149,7 +153,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
 
     if (!recipientEmail) {
       console.error(
-        'Cannot send email confirmation: Recipient email not found in API response.'
+        'Cannot send email confirmation: Recipient email not found in API response.',
       );
       return;
     }
@@ -176,7 +180,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
     };
 
     const encodedBookingData = encodeURIComponent(
-      JSON.stringify(bookingDataForEmail)
+      JSON.stringify(bookingDataForEmail),
     );
 
     window.location.href = `https://develop-booking.buenohotel.com.do/email/voucher-details?bookingData=${encodedBookingData}`;
@@ -204,7 +208,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
     this.http
       .patch<TourApiResponse>(
         `https://api-tours.buenohotel.com.do/reservations`,
-        paymentData
+        paymentData,
       )
       .subscribe({
         next: (response) => {
@@ -220,7 +224,7 @@ export class TransaccionAprobadaPageComponent implements OnInit {
   }
 
   redirectToTourEmailConfirmation(
-    reservationData: TourApiResponse['data']
+    reservationData: TourApiResponse['data'],
   ): void {
     const tourDate = new Date(reservationData.date);
     const formattedDate = tourDate
@@ -254,5 +258,38 @@ export class TransaccionAprobadaPageComponent implements OnInit {
 
     const encodedBookingData = encodeURIComponent(JSON.stringify(bookingData));
     window.location.href = `https://develop-booking.buenohotel.com.do/email/tour-payment-confirmation?bookingData=${encodedBookingData}`;
+  }
+
+  formatMonto(valor: string | number): number {
+    console.log('valor', valor);
+    if (!valor) return 0;
+    const numero = typeof valor === 'string' ? parseFloat(valor) : valor;
+
+    if (isNaN(numero)) return 0;
+
+    return numero / 100;
+  }
+
+  formatFecha(fechaStr: string): string {
+    // Verifica que la fecha exista y tenga el largo correcto (14 caracteres)
+    if (!fechaStr || fechaStr.length !== 14) {
+      return fechaStr; // Si no tiene el formato esperado, la devuelve tal cual
+    }
+
+    const year = fechaStr.substring(0, 4);
+    const month = fechaStr.substring(4, 6);
+    const day = fechaStr.substring(6, 8);
+    let hour = parseInt(fechaStr.substring(8, 10), 10);
+    const minute = fechaStr.substring(10, 12);
+    const second = fechaStr.substring(12, 14);
+
+    // Opcional: Convertir a formato 12 horas (AM/PM)
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12;
+    hour = hour ? hour : 12; // Si la hora es 0, la convierte en 12
+    const hourFormatted = hour < 10 ? '0' + hour : hour;
+
+    // Retorna: DD/MM/YYYY HH:MM:SS AM/PM
+    return `${day}/${month}/${year} ${hourFormatted}:${minute} ${ampm}`;
   }
 }

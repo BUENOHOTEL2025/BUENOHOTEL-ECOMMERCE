@@ -1,0 +1,131 @@
+/* transaccion-aprobada-page.component.scss */
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(
+    --color-white
+  ); /* Usamos --color-white de tus variables existentes */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Usar una sombra ligera */
+  text-align: center;
+}
+
+header {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-detail-color); /* Usamos la nueva variable */
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: var(--primary-success-color); /* Usamos la nueva variable */
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 svg {
+  margin-right: 15px;
+}
+
+.success-message {
+  background-color: var(--success-bg); /* Usamos la nueva variable */
+  color: var(--success-text); /* Usamos la nueva variable */
+  padding: 15px 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.order-summary {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.order-summary h2 {
+  color: var(--secondary-detail-color); /* Usamos la nueva variable */
+  font-size: 1.8em;
+  border-bottom: 2px solid var(--secondary-detail-color); /* Usamos la nueva variable */
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px 30px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dotted var(--border-detail-color); /* Usamos la nueva variable */
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item strong {
+  color: var(
+    --color-black
+  ); /* Usamos --color-black de tus variables existentes */
+  font-weight: 600;
+  flex-basis: 50%;
+}
+
+.detail-item span {
+  color: var(--light-gray-text); /* Usamos la nueva variable */
+  text-align: right;
+  flex-basis: 50%;
+}
+
+.important-details {
+  margin-top: 30px;
+  background-color: #f0f8ff; /* Un azul muy claro para resaltar, puedes crear una variable si se repite */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0f0ff;
+  margin-bottom: 40px;
+}
+
+.important-details h3 {
+  color: var(--secondary-detail-color); /* Usamos la nueva variable */
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+.important-details .detail-grid .detail-item strong,
+.important-details .detail-grid .detail-item span {
+  font-weight: 600;
+  color: var(--secondary-detail-color); /* Usamos la nueva variable */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+  header h1 {
+    font-size: 2em;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .detail-item strong {
+    margin-bottom: 5px;
+  }
+  .detail-item span {
+    text-align: left;
+  }
+}
