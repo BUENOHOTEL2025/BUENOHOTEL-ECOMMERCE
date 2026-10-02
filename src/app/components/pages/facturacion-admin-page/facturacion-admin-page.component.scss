@@ -1,0 +1,72 @@
+.hub {
+  min-height: 100vh;
+  background: #eef2f6;
+  color: #1a365d;
+  font-family: Arial, sans-serif;
+  padding: 24px 16px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.hub-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+h1 { margin: 0 0 6px; font-size: 1.6rem; }
+h2 { margin: 0 0 10px; font-size: 1.15rem; }
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(26, 54, 93, 0.08);
+}
+.muted { color: #64748b; font-size: 0.92rem; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+.wide { grid-column: 1 / -1; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 700; }
+input, select {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.between { justify-content: space-between; align-items: center; }
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn.sm { padding: 6px 10px; font-size: 12px; }
+.btn.amber { background: #FBB03B; color: #222; }
+.btn.navy { background: #1a365d; color: #fff; }
+.btn.ghost { background: transparent; border: 1px solid #1a365d; color: #1a365d; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.search { width: 100%; margin: 8px 0; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+.pill { color: #fff; border-radius: 999px; padding: 3px 8px; font-size: 11px; font-weight: 800; }
+.actions { white-space: nowrap; }
+.err, .msg { margin-top: 10px; }
+.err { color: #b91c1c; }
+.modal {
+  position: fixed; inset: 0; background: rgba(26,54,93,0.55);
+  display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 40;
+}
+.modal-box { background: #fff; width: min(720px, 100%); max-height: 92vh; overflow: auto; border-radius: 14px; }
+.modal-h { background: #1a365d; color: #fff; display: flex; justify-content: space-between; padding: 12px 16px; }
+.x { background: transparent; border: none; color: #fff; font-size: 28px; cursor: pointer; }
+.modal-b { padding: 16px; }
+.login label { margin-bottom: 10px; }

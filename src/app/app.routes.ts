@@ -8,7 +8,10 @@ import { TransaccionAprobadaPageComponent } from '@pages/transaccion-aprobada-pa
 import { TransaccionDeclinadaPageComponent } from '@pages/transaccion-declinada-page/transaccion-declinada-page.component';
 import { TransaccionCanceladaPageComponent } from '@pages/transaccion-cancelada-page/transaccion-cancelada-page.component';
 
+import { FacturacionAdminPageComponent } from '@pages/facturacion-admin-page/facturacion-admin-page.component';
+
 export const routes: Routes = [
+  { path: 'admin/comprobantes', component: FacturacionAdminPageComponent },
   {
     path: '',
     component: PageLayoutComponent,

@@ -1,0 +1,106 @@
+<div class="hub">
+  <header class="hub-head">
+    <div>
+      <h1>Centro de facturación electrónica</h1>
+      <p>Aquí se ven todos los e-CF (Eventos, Booking, Ecommerce y facturas sueltas). Eventos y Booking siguen pudiendo emitir desde su propia página.</p>
+    </div>
+    <button *ngIf="loggedIn()" type="button" class="btn ghost" (click)="onLogout()">Salir</button>
+  </header>
+
+  <section *ngIf="!loggedIn()" class="card login">
+    <h2>Entrar</h2>
+    <p>Usa la misma cuenta de administración de BuenoHotel.</p>
+    <label>Correo <input type="email" [(ngModel)]="email" autocomplete="username" /></label>
+    <label>Contraseña <input type="password" [(ngModel)]="password" autocomplete="current-password" /></label>
+    <button type="button" class="btn amber" (click)="onLogin()" [disabled]="loading">{{ loading ? 'Entrando…' : 'Entrar' }}</button>
+    <p class="err" *ngIf="loginError">{{ loginError }}</p>
+  </section>
+
+  <ng-container *ngIf="loggedIn()">
+    <section class="card">
+      <h2>Nueva factura (independiente)</h2>
+      <p class="muted">Seguro u otro cobro que no nace en Eventos ni Booking. La vista previa <strong>no</strong> gasta e-NCF. Emitir sí envía a Impuestos Internos. Origen visual: Ecommerce.</p>
+      <div class="grid">
+        <label>Origen visual
+          <select [(ngModel)]="form.origen">
+            <option value="ecommerce">Ecommerce</option>
+            <option value="seguro">Seguro</option>
+            <option value="manual">Manual</option>
+          </select>
+        </label>
+        <label>Razón social <input [(ngModel)]="form.nombreRazon" /></label>
+        <label>RNC <input [(ngModel)]="form.rnc" /></label>
+        <label class="wide">Descripción <input [(ngModel)]="form.descripcion" placeholder="Seguro de viaje, etc." /></label>
+        <label>Cantidad <input type="number" min="1" [(ngModel)]="form.cantidad" (ngModelChange)="recalc()" /></label>
+        <label>Precio unitario <input type="number" min="0" step="0.01" [(ngModel)]="form.precioUnitario" (ngModelChange)="recalc()" /></label>
+        <label>ITBIS <input type="number" min="0" step="0.01" [(ngModel)]="form.itbis" (ngModelChange)="recalc()" /></label>
+        <label>Total RD$ <input type="number" [(ngModel)]="form.totalRD" /></label>
+      </div>
+      <div class="row">
+        <button type="button" class="btn navy" (click)="preview()">Vista previa (no envía)</button>
+        <button type="button" class="btn amber" (click)="emitir()">Emitir a Impuestos Internos</button>
+      </div>
+      <p class="msg" *ngIf="formMsg">{{ formMsg }}</p>
+    </section>
+
+    <section class="card">
+      <h2>Consultar un número</h2>
+      <div class="row wrap">
+        <label>e-NCF <input [(ngModel)]="qEncf" placeholder="E310000000001" /></label>
+        <label>TrackId <input [(ngModel)]="qTrack" placeholder="opcional" /></label>
+        <button type="button" class="btn amber" (click)="consultar()">Ver estado</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row wrap between">
+        <h2>Todos los comprobantes</h2>
+        <button type="button" class="btn navy" (click)="cargar()">Actualizar lista</button>
+      </div>
+      <input class="search" type="search" [(ngModel)]="q" (ngModelChange)="applyFilter()" placeholder="Buscar por número, origen, empresa, RNC…" />
+      <p class="muted">{{ state }}</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Número</th>
+              <th>Cliente</th>
+              <th>DGII</th>
+              <th>Fecha</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of filtered">
+              <td>
+                <strong>{{ r.encf || '—' }}</strong>
+                <div class="muted">{{ origenLabel(r) }}</div>
+              </td>
+              <td>
+                {{ r.razonSocial || r.clienteNombre || '—' }}
+                <div class="muted">RNC {{ r.rncComprador || '—' }}</div>
+              </td>
+              <td><span class="pill" [style.background]="badge(r).bg">{{ badge(r).label }}</span></td>
+              <td>{{ r.emitidoAt ? (r.emitidoAt | date:'short') : '—' }}</td>
+              <td class="actions">
+                <button type="button" class="btn navy sm" (click)="consultar(r)">Detalle</button>
+                <button type="button" class="btn amber sm" (click)="verFactura(r)" [disabled]="!(r.tieneImpresion || r.registroId)">Ver factura</button>
+                <button type="button" class="btn ghost sm" (click)="xml(r)" [disabled]="!(r.tieneXml || r.registroId)">XML</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </ng-container>
+
+  <div class="modal" *ngIf="modalOpen" (click)="modalOpen = false">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-h">
+        <strong>Estado del comprobante</strong>
+        <button type="button" class="x" (click)="modalOpen = false">&times;</button>
+      </div>
+      <div class="modal-b" [innerHTML]="modalHtml"></div>
+    </div>
+  </div>
+</div>
